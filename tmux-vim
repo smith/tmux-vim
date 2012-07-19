@@ -184,7 +184,7 @@ _tmux_vim_start() {
 
     # Split a new pane, start vim in it, and record the pane index
     local tmux_vim_pane=$(tmux split-window -P -$split_method -l $split_size \
-                        "exec vim $vim_args")
+                        "exec mvim $vim_args")
 
     # Now convert the pane index into a global persistent id
     # 0:1.1: [100x88] [history 0/10000, 0 bytes] %2
@@ -229,7 +229,8 @@ tmux_vim() {
 
         [[ "$PWD" != "$( _tmux_vim_last_dir )" ]] && _tmux_vim_op cd -
 
-        _tmux_vim_op buffer "${!#}"       # switch to the final file
+        _tmux_vim_op 1bw          # delete the 1st empty buffer
+        _tmux_vim_op sblast       # switch to the final file
     fi
 
     tmux select-pane -t $( _tmux_vim_pane_id )
