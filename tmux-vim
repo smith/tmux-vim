@@ -184,7 +184,7 @@ _tmux_vim_start() {
 
     # Split a new pane, start vim in it, and record the pane index
     local tmux_vim_pane=$(tmux split-window -P -$split_method -l $split_size \
-                        "exec mvim $vim_args")
+                        "exec vim $vim_args")
 
     # Now convert the pane index into a global persistent id
     # 0:1.1: [100x88] [history 0/10000, 0 bytes] %2
